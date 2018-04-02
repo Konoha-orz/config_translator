@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>配置信息加解密</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+    </script>
+
+
+</head>
+<body>
+<textarea id="t1" placeholder="输入内容" style="width: 25%;height:500px"></textarea>
+<button id="b1" type="button" > &#9668;加密</button>
+<button id="b2" type="button" > &#9658;解密</button>
+<textarea id="t2" placeholder="结果" style="width: 25%;height:500px"></textarea>
+
+</body>
+<script type="text/javascript">
+
+
+    $(function () {
+        $('#b1').click(function () {
+
+            $.ajax({
+                url: "/encrypt",
+                type: "POST",
+                // data: JSON.stringify({"name":"Konoha","password":"123456"}),
+                data: $("#t1").val(),
+                dataType: "text",
+                // contentType: "application/json;charset=utf-8",
+                contentType: "text/plain;charset=utf-8",
+                success: function (result) {
+                    // alert(result);
+                    // window.location.reload();
+                    $("#t2").html(result);
+                },
+                error: function () {
+                    alert("Error");
+                    // alert(JSON.stringify(result));
+                }
+            })
+        });
+    })
+
+    $(function () {
+        $('#b2').click(function () {
+            $.ajax({
+                url: "/decrypt",
+                type: "POST",
+                // data: JSON.stringify({"name":"Konoha","password":"123456"}),
+                data: $("#t1").val(),
+                dataType: "text",
+                // contentType: "application/json;charset=utf-8",
+                contentType: "text/plain;charset=utf-8",
+                success: function (result) {
+                    // alert(result);
+                    // window.location.reload();
+                    $("#t2").html(result);
+                },
+                error: function () {
+                    alert("Error");
+                    // alert(JSON.stringify(result));
+                }
+            })
+        });
+    })
+
+</script>
+</html>
